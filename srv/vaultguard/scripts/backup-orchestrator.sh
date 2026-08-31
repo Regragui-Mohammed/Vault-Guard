@@ -26,3 +26,20 @@ tar -cf "$TAR_FILE" -C "$STAGING_DIR" "backup-$TIMESTAMP"
 
 echo "[SUCCESS] Backup Engine completed Successfully."
 echo " Archive saved at : $TAR_FILE" 
+
+GPG_RECIPIENT="VaultGuard"
+
+echo "[INFO] Encrypting Archive with GPG..."
+gpg --batch --yes --trust-model always -r "$GPG_RECIPIENT" -e "$TAR_FILE"
+
+echo "[INFO] Generating SHA256 CheckSum ..."
+sha256sum "$TAR_FILE.gpg" > "$TAR_FILE.gpg.sha256"
+
+echo "[INFO] Applying Immutability Lock..."
+sudo chattr +i "$TAR_FILE.gpg"
+sudo chattr +i "$TAR_FILE.gpg.sha256"
+
+rm -f "$TAR_FILE"
+
+echo "[SUCCESS] Vault-Guard Backup Completed + Encrypted + Locked " 
+
