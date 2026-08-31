@@ -17,14 +17,13 @@ If a backup system is built simply using standard tools (like `cp` or `tar`), a 
 
 ---
 
-## 🛡️ The Solution (The 4 Security Pillars)
+## 🛡️ The Solution (The 3 Security Pillars)
 
 Vault-Guard defeats ransomware and unauthorized access through a strict 4-pillar defense-in-depth architecture:
 
-1. **Zero-Downtime Backups (LVM):** Uses Logical Volume Manager (`lvcreate`) snapshots to capture crash-consistent backups of live data without stopping production services.
-2. **Principle of Least Privilege (PoLP):** Uses a dedicated service account (`backup-svc`) that only has rights to write data, but absolutely no rights to delete or modify existing backups.
-3. **Immutable Archives (`chattr +i`):** Once a backup is generated, it is locked at the filesystem level. Not even the `root` user can delete or tamper with the file unless the immutability flag is explicitly removed.
-4. **Asymmetric Encryption (GPG):** Backups are encrypted using a Public Key on the server. The Private Key resides completely off-site, meaning an attacker cannot read the backup contents even if the server is fully compromised.
+1. **Principle of Least Privilege (PoLP):** Uses a dedicated service account (`backup-svc`) that only has rights to write data, but absolutely no rights to delete or modify existing backups.
+2. **Immutable Archives (`chattr +i`):** Once a backup is generated, it is locked at the filesystem level. Not even the `root` user can delete or tamper with the file unless the immutability flag is explicitly removed.
+3. **Asymmetric Encryption (GPG):** Backups are encrypted using a Public Key on the server. The Private Key resides completely off-site, meaning an attacker cannot read the backup contents even if the server is fully compromised.
 
 ---
 
@@ -46,8 +45,7 @@ The system is built in 5 distinct phases:
 - Implementation of Advanced ACLs (`setfacl`) on `/srv/vaultguard/`.
 - Configuration of strict `/etc/sudoers.d/` drop-in files for privilege escalation restriction.
 
-### Phase 2: The Core Backup Engine (Zero-Downtime)
-- Execution of LVM snapshots to freeze data in time.
+### Phase 2: The Core Backup Engine
 - Incremental synchronization using `rsync` with hard-links to save disk space and reduce I/O.
 - Compression of the staging area into a single `.tar` archive.
 
