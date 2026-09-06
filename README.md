@@ -19,7 +19,7 @@ If a backup system is built simply using standard tools (like `cp` or `tar`), a 
 
 ## 🛡️ The Solution (The 3 Security Pillars)
 
-Vault-Guard defeats ransomware and unauthorized access through a strict 4-pillar defense-in-depth architecture:
+Vault-Guard defeats ransomware and unauthorized access through a strict 3-pillar defense-in-depth architecture:
 
 1. **Principle of Least Privilege (PoLP):** Uses a dedicated service account (`backup-svc`) that only has rights to write data, but absolutely no rights to delete or modify existing backups.
 2. **Immutable Archives (`chattr +i`):** Once a backup is generated, it is locked at the filesystem level. Not even the `root` user can delete or tamper with the file unless the immutability flag is explicitly removed.
