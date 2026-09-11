@@ -1,0 +1,13 @@
+[Unit]
+Description=Vault-Guard Entreprise Backup Orchestrator
+After=local-fs.target
+
+[Service]
+Type=oneshot
+User=backup-svc
+Group=backup-svc
+ExecStart=/srv/vaultguard/scripts/backup-orchestrator.sh
+
+NoNewPrivilages=true
+ProtectSystem=strict
+ReadWritePath=/srv/vaultguard/staging /srv/vaultguard/archives
