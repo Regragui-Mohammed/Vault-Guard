@@ -1,0 +1,8 @@
+[Unit]
+Description=Vault-Guard Retention Purge
+
+[Service]
+Type=oneshot
+User= backup-admin
+ExecStart=/srv/vaultguard/scripts/vault-retention.sh
+

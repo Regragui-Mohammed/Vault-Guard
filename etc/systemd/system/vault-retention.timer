@@ -1,0 +1,9 @@
+[Unit]
+Description=Run Vault-Guard Retention Weekly
+
+[Timer]
+OnCalendar=weekly
+Persistent=true
+
+[Install]
+WantedBy=timer.target
