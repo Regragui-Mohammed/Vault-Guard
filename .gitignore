@@ -1,1 +1,11 @@
 *.save
+
+# Dashboard — Node.js
+dashboard/node_modules/
+dashboard/dist/
+
+# Logs
+*.log
+
+# OS
+.DS_Store
