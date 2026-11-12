@@ -1,4 +1,4 @@
-# 🛡️ Vault-Guard: Enterprise Ransomware-Resilient Backup System
+# 🛡️ Vault-Guard: Enterprise Ransomware-Resilient Backup System 
 
 <div align="center">
 
